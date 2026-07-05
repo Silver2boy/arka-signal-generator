@@ -1,1 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ARKA Signal Generator</title>
 
+<style>
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.output {
+  margin-top: 20px;
+  white-space: pre-wrap;
+  background: #111827;
+  padding: 15px;
+  border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>ARKA Signal Generator</h2>
+
+<textarea id="input" placeholder="Paste signal here..."></textarea>
+
+<button onclick="convert()">Convert</button>
+<button onclick="copy()">Copy</button>
+
+<div class="output" id="output"></div>
+</div>
+
+<script>
+function convert() {
+  let text = document.getElementById("input").value;
+
+  let result = "📊 ARKA SIGNAL\n\n" + text
+    .replace(/BUY/g, "🟢 BUY")
+    .replace(/SELL/g, "🔴 SELL")
+    .replace(/TP/g, "🎯 TP")
+    .replace(/SL/g, "⛔ SL");
+
+  document.getElementById("output").innerText = result;
+}
+
+function copy() {
+  let text = document.getElementById("output").innerText;
+  navigator.clipboard.writeText(text);
+  alert("Copied!");
+}
+</script>
+
+</body>
+</html>
